@@ -1,0 +1,53 @@
+.container {
+  background-color: var(--primary-color);
+  height: 65px;
+  display: flex;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+}
+
+.items:not(:last-child) {
+  margin-right: 25px;
+}
+
+.navbar {
+  width: 90%;
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.item {
+  font-size: 16px;
+  color: var(--light-color);
+  font-weight: 500;
+}
+
+.logo {
+  color: var(--light-color);
+  font-family: "Alkatra", system-ui;
+  font-weight: 600;
+  font-size: 28px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn {
+  background-color: var(--secondary-color);
+  color: var(--light-color);
+  padding: 5px 14px;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

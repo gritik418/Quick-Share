@@ -1,0 +1,123 @@
+.container {
+  border: 6px solid var(--secondary-color);
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+  border-radius: 20px;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+}
+
+.input {
+  border: 2px solid red;
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  opacity: 0;
+}
+
+.stack {
+  position: relative;
+}
+
+.title {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.label {
+  color: var(--secondary-color);
+  font-size: 26px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn {
+  margin-top: 25px;
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  padding: 6px 16px;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.divider {
+  height: 1px;
+  margin-top: 30px;
+  border: 1px dashed var(--secondary-color);
+  width: 90%;
+}
+
+.group {
+  margin-top: 25px;
+  max-width: 550px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.email_label {
+  color: var(--secondary-color);
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.email_input {
+  border: 1px solid rgb(217, 212, 212);
+  border-radius: 6px;
+  font-size: 16px;
+  outline: 0;
+  padding: 4px 8px;
+}
+
+.email_input:focus {
+  outline: 2px solid var(--secondary-color);
+}
+
+.heading {
+  font-family: "Alkatra", system-ui;
+  margin: 50px 0;
+  color: var(--primary-color);
+  font-size: 50px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.highlight {
+  color: var(--secondary-color);
+  font-style: italic;
+  font-size: 55px;
+  margin-right: 4px;
+}
+
+.linkBox {
+  border: 1px solid rgb(226, 223, 223);
+  margin-top: 30px;
+  height: 40px;
+  border-radius: 8px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copy {
+  height: 100%;
+  width: 60px;
+  background-color: rgb(241, 234, 234);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.link {
+  padding: 0px 14px;
+}

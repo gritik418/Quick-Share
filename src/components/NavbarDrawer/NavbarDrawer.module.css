@@ -1,0 +1,37 @@
+.container {
+  display: none;
+}
+
+.btn {
+  color: var(--light-color);
+  font-size: 30px;
+  align-self: center;
+}
+
+.body {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+.active {
+  background-color: #faeaf0;
+}
+
+.item {
+  font-size: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  padding: 4px 16px;
+  border-radius: 8px;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+@media screen and (max-width: 640px) {
+  .container {
+    display: flex;
+  }
+}

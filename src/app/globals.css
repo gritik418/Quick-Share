@@ -9,3 +9,7 @@
   --secondary-color: #a367b1;
   --light-color: #ffd1e3;
 }
+
+* {
+  font-family: "Montserrat", system-ui;
+}

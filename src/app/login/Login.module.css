@@ -1,0 +1,33 @@
+.container {
+  max-width: 940px;
+  width: 90%;
+  margin: 60px auto;
+  background-color: #fafafa;
+  min-height: 600px;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.content {
+  max-width: 600px;
+  width: 90%;
+  margin: auto;
+}
+
+.heading {
+  font-size: 42px;
+  font-weight: 700;
+  font-family: "Alkatra", system-ui;
+}
+
+.title {
+  font-weight: 500;
+  color: rgb(162, 162, 162);
+  margin-bottom: 60px;
+}
+
+.link {
+  color: var(--primary-color);
+  font-size: 17px;
+  font-weight: 600;
+}

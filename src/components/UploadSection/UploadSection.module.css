@@ -9,6 +9,7 @@
   flex-direction: column;
   padding: 20px;
   align-items: center;
+  margin-bottom: 80px;
 }
 
 .input {
@@ -100,18 +101,18 @@
 .linkBox {
   border: 1px solid rgb(226, 223, 223);
   margin-top: 30px;
-  height: 40px;
+  max-height: 80px;
+  height: fit-content;
+  min-height: 40px;
   border-radius: 8px;
   width: 90%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
 }
 
 .copy {
-  height: 100%;
   width: 60px;
-  background-color: rgb(241, 234, 234);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -120,4 +121,7 @@
 
 .link {
   padding: 0px 14px;
+  border-right: 1px solid grey;
+  width: 100%;
+  align-self: center;
 }

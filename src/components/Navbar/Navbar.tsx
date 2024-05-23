@@ -1,12 +1,20 @@
+"use client";
 import React from "react";
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import { FiLogIn } from "react-icons/fi";
 import { FaUserPlus } from "react-icons/fa";
 import { Menu, MenuButton, MenuList, MenuItem, Avatar } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
+import NavbarDrawer from "../NavbarDrawer/NavbarDrawer";
 
 const Navbar = () => {
+  const router = useRouter();
   const isLoggedIn = false;
+
+  const navigateTo = (route: string) => {
+    router.push(route);
+  };
   return (
     <div className={styles.container}>
       <nav className={styles.navbar}>
@@ -25,10 +33,13 @@ const Navbar = () => {
 
         {!isLoggedIn ? (
           <div className={styles.actions}>
-            <button className={styles.btn}>
+            <button className={styles.btn} onClick={() => navigateTo("/login")}>
               <FiLogIn /> Login
             </button>
-            <button className={styles.btn}>
+            <button
+              className={styles.btn}
+              onClick={() => navigateTo("/signup")}
+            >
               <FaUserPlus /> Sign Up
             </button>
           </div>
@@ -50,6 +61,8 @@ const Navbar = () => {
             </MenuList>
           </Menu>
         )}
+
+        <NavbarDrawer />
       </nav>
     </div>
   );

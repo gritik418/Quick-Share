@@ -23,8 +23,25 @@ const Login = () => {
             </Link>
           </p>
 
-          <InputGroup size="md">
+          <label htmlFor="email" className={styles.label}>
+            Email Address
+          </label>
+          <Input
+            className={`${styles.input} mb-8`}
+            name="email"
+            id="email"
+            pr="4.5rem"
+            type="email"
+            placeholder="Enter email address"
+          />
+
+          <label htmlFor="password" className={styles.label}>
+            Password
+          </label>
+          <InputGroup size="md" className={styles.input}>
             <Input
+              name="password"
+              id="password"
               pr="4.5rem"
               type={show ? "text" : "password"}
               placeholder="Enter password"
@@ -35,6 +52,11 @@ const Login = () => {
               </Button>
             </InputRightElement>
           </InputGroup>
+
+          <div className={styles.forgot}>
+            <Link href={"/forgot-password"}> Forgot Password?</Link>
+          </div>
+          <button className={styles.btn}>Login</button>
         </div>
       </div>
     </>

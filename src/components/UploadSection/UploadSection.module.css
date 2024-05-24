@@ -94,6 +94,7 @@
 .highlight {
   color: var(--secondary-color);
   font-style: italic;
+  font-family: "Alkatra", system-ui;
   font-size: 55px;
   margin-right: 4px;
 }

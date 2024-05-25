@@ -1,16 +1,16 @@
 .container {
   max-width: 940px;
   width: 90%;
-  margin: 60px auto;
+  margin: 40px auto;
   background-color: #fafafa;
   min-height: 600px;
   border-radius: 20px;
-  padding: 40px;
+  padding: 20px;
 }
 
 .content {
   max-width: 600px;
-  width: 90%;
+  width: 95%;
   margin: auto;
 }
 

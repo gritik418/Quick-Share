@@ -102,27 +102,36 @@
 .linkBox {
   border: 1px solid rgb(226, 223, 223);
   margin-top: 30px;
-  max-height: 80px;
-  height: fit-content;
-  min-height: 40px;
   border-radius: 8px;
   width: 90%;
   display: flex;
   justify-content: space-between;
-  align-items: stretch;
+  min-height: 40px;
+  overflow: hidden;
 }
 
 .copy {
   width: 60px;
   display: flex;
-  align-items: center;
+  height: inherit;
   justify-content: center;
   cursor: pointer;
+  background-color: rgb(206, 204, 204);
+  display: flex;
+  align-items: center;
 }
 
 .link {
   padding: 0px 14px;
-  border-right: 1px solid grey;
   width: 100%;
   align-self: center;
+}
+
+@media screen and (max-width: 556px) {
+  .heading {
+    font-size: 40px;
+  }
+  .highlight {
+    font-size: 44px;
+  }
 }

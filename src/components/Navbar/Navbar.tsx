@@ -7,10 +7,14 @@ import { FaUserPlus } from "react-icons/fa";
 import { Menu, MenuButton, MenuList, MenuItem, Avatar } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import NavbarDrawer from "../NavbarDrawer/NavbarDrawer";
+import { MdSpaceDashboard } from "react-icons/md";
+import { FiLogOut } from "react-icons/fi";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "@/features/auth/authSlice";
 
 const Navbar = () => {
   const router = useRouter();
-  const isLoggedIn = false;
+  const isLoggedIn: boolean = useSelector(selectIsLoggedIn);
 
   const navigateTo = (route: string) => {
     router.push(route);
@@ -24,8 +28,8 @@ const Navbar = () => {
               QuickShare
             </Link>
           </li>
-          <li className={styles.items}>
-            <Link className={styles.item} href={"/"}>
+          <li className={`${styles.items} ${styles.hide}`}>
+            <Link className={styles.item} href={"/download"}>
               Download
             </Link>
           </li>
@@ -44,25 +48,27 @@ const Navbar = () => {
             </button>
           </div>
         ) : (
-          <Menu>
-            <MenuButton>
-              <Avatar
-                size="md"
-                name="Ryan Florence"
-                src="https://bit.ly/ryan-florence"
-              />
-            </MenuButton>
-            <MenuList>
-              <MenuItem>Download</MenuItem>
-              <MenuItem>Create a Copy</MenuItem>
-              <MenuItem>Mark as Draft</MenuItem>
-              <MenuItem>Delete</MenuItem>
-              <MenuItem>Attend a Workshop</MenuItem>
-            </MenuList>
-          </Menu>
+          <div className={styles.group}>
+            <Menu>
+              <MenuButton>
+                <Avatar
+                  size="md"
+                  name="Ryan Florence"
+                  src="https://bit.ly/ryan-florence"
+                />
+              </MenuButton>
+              <MenuList>
+                <MenuItem className={styles.menuItem}>
+                  <MdSpaceDashboard /> Dashboard
+                </MenuItem>
+                <MenuItem className={styles.menuItem}>
+                  <FiLogOut /> Logout
+                </MenuItem>
+              </MenuList>
+            </Menu>
+            <NavbarDrawer />
+          </div>
         )}
-
-        <NavbarDrawer />
       </nav>
     </div>
   );

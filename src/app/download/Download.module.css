@@ -1,0 +1,50 @@
+.container {
+  max-width: 940px;
+  width: 90%;
+  margin: auto;
+  padding: 60px 0px;
+}
+
+.heading {
+  font-size: 48px;
+  color: var(--primary-color);
+  font-weight: 800;
+  font-style: italic;
+  font-family: "Alkatra", system-ui;
+  margin-bottom: 40px;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.label {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--secondary-color);
+}
+
+.input {
+  border: 2px solid var(--secondary-color);
+  border-radius: 6px;
+  height: 40px;
+  padding: 3px 18px;
+  color: var(--primary-color);
+}
+
+.input:focus {
+  outline-color: var(--primary-color);
+}
+
+.btn {
+  width: 100%;
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  font-size: 22px;
+  margin-top: 25px;
+  border-radius: 8px;
+  padding: 5px;
+  font-weight: 600;
+}

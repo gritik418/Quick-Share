@@ -52,8 +52,21 @@
   gap: 6px;
 }
 
+.menuItem {
+  font-size: 22px;
+  display: flex;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.group {
+  display: flex;
+  gap: 16px;
+}
+
 @media screen and (max-width: 640px) {
-  .actions {
+  .actions,
+  .hide {
     display: none;
   }
 }

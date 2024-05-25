@@ -14,6 +14,7 @@ import { GoHomeFill } from "react-icons/go";
 import { FiLogIn } from "react-icons/fi";
 import { FaUserPlus } from "react-icons/fa";
 import { usePathname } from "next/navigation";
+import { FaDownload } from "react-icons/fa6";
 
 const NavbarDrawer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -41,6 +42,14 @@ const NavbarDrawer = () => {
               href={"/"}
             >
               <GoHomeFill /> Home
+            </Link>
+            <Link
+              className={`${styles.item} ${
+                pathname === "/download" && styles.active
+              }`}
+              href={"/download"}
+            >
+              <FaDownload /> Download
             </Link>
             <Link
               className={`${styles.item} ${

@@ -17,6 +17,9 @@ const UploadSection = () => {
     console.log(file);
   };
 
+  const link =
+    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facerenulla!";
+
   return (
     <>
       <h1 className={styles.heading}>
@@ -58,20 +61,13 @@ const UploadSection = () => {
 
         <div className={styles.linkBox}>
           <p className={styles.link}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere,
-            nulla!
+            {link.length > 50 ? link.slice(0, 59) + "..." : link}
           </p>
-          <Tooltip
-            hasArrow
-            label="Copy Link"
-            className={styles.tooltip}
-            bg="gray.300"
-            color="black"
-          >
-            <div className={styles.copy}>
+          <div className={styles.copy}>
+            <Tooltip content="Copy to Clipboard">
               <FaCopy />
-            </div>
-          </Tooltip>
+            </Tooltip>
+          </div>
         </div>
 
         <div className={styles.divider}></div>

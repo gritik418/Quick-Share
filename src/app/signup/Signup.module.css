@@ -5,17 +5,17 @@
   background-color: #fafafa;
   min-height: 600px;
   border-radius: 20px;
-  padding: 40px;
+  padding: 20px;
 }
 
 .content {
   max-width: 600px;
-  width: 90%;
+  width: 95%;
   margin: auto;
 }
 
 .heading {
-  font-size: 42px;
+  font-size: 38px;
   font-weight: 700;
   font-family: "Alkatra", system-ui;
 }
@@ -52,4 +52,10 @@
   font-weight: 700;
   padding: 5px;
   border-radius: 8px;
+}
+
+@media screen and (max-width: 556px) {
+  .heading {
+    font-size: 30px;
+  }
 }

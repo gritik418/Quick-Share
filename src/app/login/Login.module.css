@@ -1,7 +1,7 @@
 .container {
   max-width: 940px;
   width: 90%;
-  margin: 40px auto;
+  margin: 60px auto;
   background-color: #fafafa;
   min-height: 600px;
   border-radius: 20px;
@@ -60,4 +60,16 @@
   font-weight: 700;
   padding: 5px;
   border-radius: 8px;
+}
+
+.error {
+  display: block;
+  margin-bottom: 25px;
+  color: red;
+  margin-top: 2px;
+}
+
+.group {
+  display: flex;
+  justify-content: space-between;
 }

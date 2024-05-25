@@ -1,15 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {
-  LoginDataType,
-  SignupDataType,
-  userLogin,
-  userSignup,
-} from "./authAPI";
+import { userLogin, userSignup } from "./authAPI";
+import { LoginDataType } from "@/validators/loginSchema";
+import { Bounce, toast } from "react-toastify";
+import { SignupDataType } from "@/validators/signupSchema";
 
 const initialState = {
   isLoggedIn: false,
   loginLoading: false,
   signupLoading: false,
+  loginErrors: {},
+  signupErrors: {},
 };
 
 export const userLoginAsync = createAsyncThunk(
@@ -36,10 +36,41 @@ const authSlice = createSlice({
     builder
       .addCase(userLoginAsync.pending, (state, action) => {
         state.loginLoading = true;
+        state.loginErrors = {};
+        state.signupErrors = {};
       })
       .addCase(userLoginAsync.fulfilled, (state, action) => {
         state.loginLoading = false;
-        console.log(action.payload);
+        if (action.payload.success) {
+          state.isLoggedIn = true;
+          toast.success(action.payload.message, {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+        } else {
+          if (action.payload.errors) {
+            state.loginErrors = action.payload.errors;
+          } else {
+            toast.error(action.payload.message, {
+              position: "top-right",
+              autoClose: 1500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              transition: Bounce,
+            });
+          }
+        }
       })
       .addCase(userLoginAsync.rejected, (state, action) => {
         state.loginLoading = false;
@@ -47,10 +78,40 @@ const authSlice = createSlice({
       })
       .addCase(userSignupAsync.pending, (state, action) => {
         state.signupLoading = true;
+        state.loginErrors = {};
+        state.signupErrors = {};
       })
       .addCase(userSignupAsync.fulfilled, (state, action) => {
         state.signupLoading = false;
-        console.log(action.payload);
+        if (action.payload.success) {
+          toast.success(action.payload.message, {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
+        } else {
+          if (action.payload.errors) {
+            state.signupErrors = action.payload.errors;
+          } else {
+            toast.error(action.payload.message, {
+              position: "top-right",
+              autoClose: 1500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              transition: Bounce,
+            });
+          }
+        }
       })
       .addCase(userSignupAsync.rejected, (state, action) => {
         state.signupLoading = false;
@@ -62,5 +123,7 @@ const authSlice = createSlice({
 export const selectIsLoggedIn = (state: any) => state.auth.isLoggedIn;
 export const selectLoginLoading = (state: any) => state.auth.loginLoading;
 export const selectSignupLoading = (state: any) => state.auth.signupLoading;
+export const selectSignupErrors = (state: any) => state.auth.signupErrors;
+export const selectLoginErrors = (state: any) => state.auth.loginErrors;
 
 export default authSlice.reducer;

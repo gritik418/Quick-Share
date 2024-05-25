@@ -1,6 +1,6 @@
 "use client";
 import Navbar from "@/components/Navbar/Navbar";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Login.module.css";
 import Link from "next/link";
 import { InputGroup, InputRightElement, Button, Input } from "@chakra-ui/react";
@@ -11,29 +11,33 @@ import {
   userLoginAsync,
 } from "@/features/auth/authSlice";
 import { Dispatch } from "@reduxjs/toolkit";
-import { LoginDataType } from "@/features/auth/authAPI";
+import loginSchema, { LoginDataType } from "@/validators/loginSchema";
 import { redirect } from "next/navigation";
+import { useFormik } from "formik";
 
 const Login = () => {
   const [show, setShow] = useState<boolean>(false);
   const dispatch = useDispatch<Dispatch<any>>();
   const isLoggedIn: boolean = useSelector(selectIsLoggedIn);
   const loading: boolean = useSelector(selectLoginLoading);
-  const [userData, setUserData] = useState<LoginDataType>({
-    email: "",
-    password: "",
-  });
 
   const handleClick = () => setShow(!show);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
+  const handleLogin = (values: LoginDataType) => {
+    dispatch(userLoginAsync(values));
+    formik.resetForm();
   };
 
-  const handleLogin = () => {
-    dispatch(userLoginAsync(userData));
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: (values: LoginDataType) => {
+      handleLogin(values);
+    },
+    validationSchema: loginSchema,
+  });
 
   useEffect(() => {
     if (!isLoggedIn) return;
@@ -53,45 +57,64 @@ const Login = () => {
               Create a free account
             </Link>
           </p>
-
-          <label htmlFor="email" className={styles.label}>
-            Email Address
-          </label>
-          <Input
-            className={`${styles.input} mb-8`}
-            name="email"
-            onChange={handleChange}
-            id="email"
-            pr="4.5rem"
-            type="email"
-            placeholder="Enter email address"
-          />
-
-          <label htmlFor="password" className={styles.label}>
-            Password
-          </label>
-          <InputGroup size="md" className={styles.input}>
+          <form onSubmit={formik.handleSubmit}>
+            <label htmlFor="email" className={styles.label}>
+              Email Address
+            </label>
             <Input
-              onChange={handleChange}
-              name="password"
-              id="password"
+              className={styles.input}
+              name="email"
+              onChange={formik.handleChange}
+              id="email"
+              value={formik.values.email}
               pr="4.5rem"
-              type={show ? "text" : "password"}
-              placeholder="Enter password"
+              type="email"
+              placeholder="Enter email address"
             />
-            <InputRightElement width="4.5rem">
-              <Button h="1.75rem" size="sm" onClick={handleClick}>
-                {show ? "Hide" : "Show"}
-              </Button>
-            </InputRightElement>
-          </InputGroup>
+            <span className={styles.error}>{`${
+              formik.errors?.email !== undefined
+                ? formik.errors?.email![0]?.toUpperCase() +
+                  formik?.errors?.email?.slice(1)
+                : ""
+            }`}</span>
 
-          <div className={styles.forgot}>
-            <Link href={"/forgot-password"}> Forgot Password?</Link>
-          </div>
-          <button className={styles.btn} onClick={handleLogin}>
-            {loading ? "Processing..." : "Login"}
-          </button>
+            <div className={styles.group}>
+              <label htmlFor="password" className={styles.label}>
+                Password
+              </label>
+
+              <div className={styles.forgot}>
+                <Link href={"/forgot-password"}> Forgot Password?</Link>
+              </div>
+            </div>
+            <InputGroup size="md" className={styles.input}>
+              <Input
+                onChange={formik.handleChange}
+                name="password"
+                id="password"
+                value={formik.values.password}
+                pr="4.5rem"
+                type={show ? "text" : "password"}
+                placeholder="Enter password"
+              />
+              <InputRightElement width="4.5rem">
+                <Button h="1.75rem" size="sm" onClick={handleClick}>
+                  {show ? "Hide" : "Show"}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
+
+            <span className={styles.error}>{`${
+              formik.errors?.password !== undefined
+                ? formik.errors?.password![0]?.toUpperCase() +
+                  formik?.errors?.password?.slice(1)
+                : ""
+            }`}</span>
+
+            <button className={styles.btn} type="submit">
+              {loading ? "Processing..." : "Login"}
+            </button>
+          </form>
         </div>
       </div>
     </>

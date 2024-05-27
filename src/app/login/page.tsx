@@ -7,6 +7,7 @@ import { InputGroup, InputRightElement, Button, Input } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectIsLoggedIn,
+  selectLoginErrors,
   selectLoginLoading,
   userLoginAsync,
 } from "@/features/auth/authSlice";
@@ -20,6 +21,7 @@ const Login = () => {
   const dispatch = useDispatch<Dispatch<any>>();
   const isLoggedIn: boolean = useSelector(selectIsLoggedIn);
   const loading: boolean = useSelector(selectLoginLoading);
+  const errors: LoginDataType = useSelector(selectLoginErrors);
 
   const handleClick = () => setShow(!show);
 
@@ -40,6 +42,7 @@ const Login = () => {
   });
 
   useEffect(() => {
+    console.log(isLoggedIn);
     if (!isLoggedIn) return;
     redirect("/");
   }, [isLoggedIn]);
@@ -72,7 +75,9 @@ const Login = () => {
               placeholder="Enter email address"
             />
             <span className={styles.error}>{`${
-              formik.errors?.email !== undefined
+              errors?.email
+                ? errors?.email
+                : formik.errors?.email !== undefined
                 ? formik.errors?.email![0]?.toUpperCase() +
                   formik?.errors?.email?.slice(1)
                 : ""
@@ -105,7 +110,9 @@ const Login = () => {
             </InputGroup>
 
             <span className={styles.error}>{`${
-              formik.errors?.password !== undefined
+              errors?.password
+                ? errors?.password
+                : formik.errors?.password !== undefined
                 ? formik.errors?.password![0]?.toUpperCase() +
                   formik?.errors?.password?.slice(1)
                 : ""

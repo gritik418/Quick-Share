@@ -10,6 +10,7 @@ export const userLogin = async (loginInfo: LoginDataType) => {
       headers: {
         "Content-Type": "application/json",
       },
+      withCredentials: true,
     });
 
     return data;

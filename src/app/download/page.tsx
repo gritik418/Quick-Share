@@ -1,8 +1,24 @@
-import React from "react";
+"use client";
+import React, { ChangeEvent, useState } from "react";
 import styles from "./Download.module.css";
 import Navbar from "@/components/Navbar/Navbar";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
+import { findFileAsync } from "@/features/file/fileSlice";
 
 const Download = () => {
+  const [fileLink, setFileLink] = useState<string>();
+  const dispatch = useDispatch<Dispatch<any>>();
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFileLink(e.target.value);
+  };
+
+  const handleFindFile = () => {
+    if (!fileLink) return;
+    dispatch(findFileAsync(fileLink!));
+  };
+
   return (
     <>
       <Navbar />
@@ -16,11 +32,15 @@ const Download = () => {
           <input
             type="text"
             placeholder="Paste the link here"
+            value={fileLink}
+            onChange={handleChange}
             className={styles.input}
           />
         </div>
 
-        <button className={styles.btn}>Continue</button>
+        <button className={styles.btn} onClick={handleFindFile}>
+          Continue
+        </button>
       </div>
     </>
   );

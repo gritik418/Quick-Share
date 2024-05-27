@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { findFile, uploadFile } from "./fileAPI";
+import { downloadFile, findFile, uploadFile } from "./fileAPI";
 import { File } from "buffer";
 
 const initialState = {
   uploadLoading: false,
   fileLink: "",
   findLoading: false,
-  file: {},
+  file: <any>{},
   downloadLink: "",
 };
 
@@ -22,6 +22,14 @@ export const findFileAsync = createAsyncThunk(
   "file/findFile",
   async (link: string) => {
     const response = await findFile(link);
+    return response;
+  }
+);
+
+export const downloadFileAsync = createAsyncThunk(
+  "file/downloadFile",
+  async (link: string) => {
+    const response = await downloadFile(link);
     return response;
   }
 );
@@ -58,6 +66,14 @@ const fileSlice = createSlice({
       })
       .addCase(findFileAsync.rejected, (state, action) => {
         state.findLoading = false;
+      })
+      .addCase(downloadFileAsync.fulfilled, (state, action) => {
+        const url = window.URL.createObjectURL(new Blob([action.payload.data]));
+        const linkAttribute = document.createElement("a");
+        linkAttribute.href = url;
+        linkAttribute.setAttribute("download", state.file.originalName);
+        document.body.appendChild(linkAttribute);
+        linkAttribute.click();
       });
   },
 });

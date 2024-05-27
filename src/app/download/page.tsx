@@ -51,7 +51,9 @@ const Download = () => {
           {loading ? "Processing..." : "Continue"}
         </button>
 
-        {downloadLink && fileInfo && <DownloadFile />}
+        {downloadLink && fileInfo && (
+          <DownloadFile downloadLink={downloadLink} />
+        )}
       </div>
     </>
   );

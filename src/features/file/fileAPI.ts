@@ -42,3 +42,15 @@ export const findFile = async (link: string) => {
     return error.response.data;
   }
 };
+
+export const downloadFile = async (link: string) => {
+  try {
+    const response = await axios.get(link, {
+      withCredentials: true,
+      responseType: "blob",
+    });
+    return response;
+  } catch (error: any) {
+    return error.response.data;
+  }
+};

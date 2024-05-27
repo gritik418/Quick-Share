@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { userLogin, userSignup } from "./authAPI";
+import { getUser, userLogin, userSignup } from "./authAPI";
 import { LoginDataType } from "@/validators/loginSchema";
 import { Bounce, toast } from "react-toastify";
 import { SignupDataType } from "@/validators/signupSchema";
@@ -10,7 +10,13 @@ const initialState = {
   signupLoading: false,
   loginErrors: {},
   signupErrors: {},
+  user: {},
 };
+
+export const getUserAsync = createAsyncThunk("auth/getUser", async () => {
+  const response = await getUser();
+  return response;
+});
 
 export const userLoginAsync = createAsyncThunk(
   "auth/userLogin",
@@ -34,6 +40,12 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getUserAsync.fulfilled, (state, action) => {
+        if (action.payload.success) {
+          state.isLoggedIn = true;
+          state.user = action.payload.user;
+        }
+      })
       .addCase(userLoginAsync.pending, (state, action) => {
         state.loginLoading = true;
         state.loginErrors = {};

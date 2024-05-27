@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Navbar.module.css";
 import Link from "next/link";
 import { FiLogIn } from "react-icons/fi";
@@ -9,16 +9,22 @@ import { useRouter } from "next/navigation";
 import NavbarDrawer from "../NavbarDrawer/NavbarDrawer";
 import { MdSpaceDashboard } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
-import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "@/features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserAsync, selectIsLoggedIn } from "@/features/auth/authSlice";
+import { Dispatch } from "@reduxjs/toolkit";
 
 const Navbar = () => {
   const router = useRouter();
+  const dispatch = useDispatch<Dispatch<any>>();
   const isLoggedIn: boolean = useSelector(selectIsLoggedIn);
 
   const navigateTo = (route: string) => {
     router.push(route);
   };
+
+  useEffect(() => {
+    dispatch(getUserAsync());
+  }, []);
   return (
     <div className={styles.container}>
       <nav className={styles.navbar}>
@@ -36,38 +42,47 @@ const Navbar = () => {
         </ul>
 
         {!isLoggedIn ? (
-          <div className={styles.actions}>
-            <button className={styles.btn} onClick={() => navigateTo("/login")}>
-              <FiLogIn /> Login
-            </button>
-            <button
-              className={styles.btn}
-              onClick={() => navigateTo("/signup")}
-            >
-              <FaUserPlus /> Sign Up
-            </button>
-          </div>
+          <>
+            <div className={styles.actions}>
+              <button
+                className={styles.btn}
+                onClick={() => navigateTo("/login")}
+              >
+                <FiLogIn /> Login
+              </button>
+              <button
+                className={styles.btn}
+                onClick={() => navigateTo("/signup")}
+              >
+                <FaUserPlus /> Sign Up
+              </button>
+            </div>
+
+            <NavbarDrawer isLoggedIn />
+          </>
         ) : (
-          <div className={styles.group}>
-            <Menu>
-              <MenuButton>
-                <Avatar
-                  size="md"
-                  name="Ryan Florence"
-                  src="https://bit.ly/ryan-florence"
-                />
-              </MenuButton>
-              <MenuList>
-                <MenuItem className={styles.menuItem}>
-                  <MdSpaceDashboard /> Dashboard
-                </MenuItem>
-                <MenuItem className={styles.menuItem}>
-                  <FiLogOut /> Logout
-                </MenuItem>
-              </MenuList>
-            </Menu>
-            <NavbarDrawer />
-          </div>
+          <>
+            <div className={styles.group}>
+              <Menu>
+                <MenuButton>
+                  <Avatar
+                    size="md"
+                    name="Ryan Florence"
+                    src="https://bit.ly/ryan-florence"
+                  />
+                </MenuButton>
+                <MenuList>
+                  <MenuItem className={styles.menuItem}>
+                    <MdSpaceDashboard /> Dashboard
+                  </MenuItem>
+                  <MenuItem className={styles.menuItem}>
+                    <FiLogOut /> Logout
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+              <NavbarDrawer isLoggedIn />
+            </div>
+          </>
         )}
       </nav>
     </div>

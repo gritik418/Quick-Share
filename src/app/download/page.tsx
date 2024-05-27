@@ -2,21 +2,30 @@
 import React, { ChangeEvent, useState } from "react";
 import styles from "./Download.module.css";
 import Navbar from "@/components/Navbar/Navbar";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
-import { findFileAsync } from "@/features/file/fileSlice";
+import {
+  findFileAsync,
+  selectDownloadLink,
+  selectFileInfo,
+  selectFindLoading,
+} from "@/features/file/fileSlice";
+import DownloadFile from "@/components/DownloadFile/DownloadFile";
 
 const Download = () => {
-  const [fileLink, setFileLink] = useState<string>();
+  const [fileLink, setFileLink] = useState<string>("");
   const dispatch = useDispatch<Dispatch<any>>();
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFileLink(e.target.value);
-  };
+  const downloadLink: string = useSelector(selectDownloadLink);
+  const fileInfo = useSelector(selectFileInfo);
+  const loading: boolean = useSelector(selectFindLoading);
 
   const handleFindFile = () => {
     if (!fileLink) return;
     dispatch(findFileAsync(fileLink!));
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFileLink(e.target.value);
   };
 
   return (
@@ -39,8 +48,10 @@ const Download = () => {
         </div>
 
         <button className={styles.btn} onClick={handleFindFile}>
-          Continue
+          {loading ? "Processing..." : "Continue"}
         </button>
+
+        {downloadLink && fileInfo && <DownloadFile />}
       </div>
     </>
   );

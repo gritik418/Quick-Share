@@ -16,7 +16,7 @@ import { FaUserPlus } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { FaDownload } from "react-icons/fa6";
 
-const NavbarDrawer = () => {
+const NavbarDrawer = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<any>();
   const pathname = usePathname();
@@ -51,22 +51,26 @@ const NavbarDrawer = () => {
             >
               <FaDownload /> Download
             </Link>
-            <Link
-              className={`${styles.item} ${
-                pathname === "/login" && styles.active
-              }`}
-              href={"/login"}
-            >
-              <FiLogIn /> Login
-            </Link>
-            <Link
-              className={`${styles.item} ${
-                pathname === "/signup" && styles.active
-              }`}
-              href={"/signup"}
-            >
-              <FaUserPlus /> Sign Up
-            </Link>
+            {!isLoggedIn && (
+              <>
+                <Link
+                  className={`${styles.item} ${
+                    pathname === "/login" && styles.active
+                  }`}
+                  href={"/login"}
+                >
+                  <FiLogIn /> Login
+                </Link>
+                <Link
+                  className={`${styles.item} ${
+                    pathname === "/signup" && styles.active
+                  }`}
+                  href={"/signup"}
+                >
+                  <FaUserPlus /> Sign Up
+                </Link>
+              </>
+            )}
           </DrawerBody>
         </DrawerContent>
       </Drawer>

@@ -6,6 +6,8 @@ const initialState = {
   uploadLoading: false,
   fileLink: "",
   findLoading: false,
+  file: {},
+  downloadLink: "",
 };
 
 export const uploadFileAsync = createAsyncThunk(
@@ -50,7 +52,8 @@ const fileSlice = createSlice({
       .addCase(findFileAsync.fulfilled, (state, action) => {
         state.findLoading = false;
         if (action.payload.success) {
-          console.log(action.payload);
+          state.downloadLink = action.payload.downloadLink;
+          state.file = action.payload.file;
         }
       })
       .addCase(findFileAsync.rejected, (state, action) => {
@@ -60,5 +63,9 @@ const fileSlice = createSlice({
 });
 
 export const selectFileLink = (state: any) => state.file.fileLink;
+export const selectUploadLoading = (state: any) => state.file.uploadLoading;
+export const selectFindLoading = (state: any) => state.file.findLoading;
+export const selectFileInfo = (state: any) => state.file.file;
+export const selectDownloadLink = (state: any) => state.file.downloadLink;
 
 export default fileSlice.reducer;

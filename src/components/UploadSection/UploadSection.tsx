@@ -6,7 +6,11 @@ import { FaCopy } from "react-icons/fa";
 import { Tooltip } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
-import { selectFileLink, uploadFileAsync } from "@/features/file/fileSlice";
+import {
+  selectFileLink,
+  selectUploadLoading,
+  uploadFileAsync,
+} from "@/features/file/fileSlice";
 import { File } from "buffer";
 import { Bounce, toast } from "react-toastify";
 
@@ -14,6 +18,7 @@ const UploadSection = () => {
   const [file, setFile] = useState<any>();
   const dispatch = useDispatch<Dispatch<any>>();
   const link: string = useSelector(selectFileLink);
+  const loading: boolean = useSelector(selectUploadLoading);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target?.files == null) return;
@@ -90,7 +95,7 @@ const UploadSection = () => {
         </p>
 
         <button className={styles.btn} onClick={handleClick}>
-          Generate Link
+          {loading ? "Uploading..." : "Generate Link"}
         </button>
 
         {link && (

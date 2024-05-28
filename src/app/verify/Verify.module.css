@@ -1,0 +1,51 @@
+.container {
+  max-width: 600px;
+  width: 90%;
+  margin: auto;
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading {
+  font-size: 42px;
+  font-weight: 700;
+  font-family: "Alkatra", system-ui;
+}
+
+.title {
+  text-align: center;
+  font-size: 22px;
+  margin: 20px 0;
+  font-weight: 400;
+  color: grey;
+  text-align: center;
+}
+
+.highlight {
+  font-weight: 600;
+}
+
+.otp {
+  margin-top: 30px;
+}
+
+.btn {
+  margin-top: 40px;
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  font-size: 25px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 4px 28px;
+}
+
+@media screen and (max-width: 600px) {
+  .heading {
+    font-size: 28px;
+  }
+  .title {
+    font-size: 18px;
+  }
+}

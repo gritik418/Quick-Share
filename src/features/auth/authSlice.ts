@@ -54,7 +54,14 @@ export const verifyEmailAsync = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    logOut: (state) => {
+      document.cookie = "token" + "=; expires=Thu, 01-Jan-70 00:00:01 GMT;";
+      state.isLoggedIn = false;
+      state.user = {};
+      state.userEmail = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getUserAsync.fulfilled, (state, action) => {
@@ -189,6 +196,8 @@ const authSlice = createSlice({
       });
   },
 });
+
+export const { logOut } = authSlice.actions;
 
 export const selectIsLoggedIn = (state: any) => state.auth.isLoggedIn;
 export const selectLoginLoading = (state: any) => state.auth.loginLoading;

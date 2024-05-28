@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { downloadFile, findFile, uploadFile } from "./fileAPI";
 import { File } from "buffer";
+import { Bounce, toast } from "react-toastify";
 
 const initialState = {
   uploadLoading: false,
@@ -49,6 +50,18 @@ const fileSlice = createSlice({
           if (action.payload.link) {
             state.fileLink = action.payload.link;
           }
+        } else {
+          toast.error(action.payload.message, {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
         }
       })
       .addCase(uploadFileAsync.rejected, (state, action) => {
@@ -62,6 +75,18 @@ const fileSlice = createSlice({
         if (action.payload.success) {
           state.downloadLink = action.payload.downloadLink;
           state.file = action.payload.file;
+        } else {
+          toast.error(action.payload.message, {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          });
         }
       })
       .addCase(findFileAsync.rejected, (state, action) => {

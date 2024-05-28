@@ -10,7 +10,11 @@ import NavbarDrawer from "../NavbarDrawer/NavbarDrawer";
 import { MdSpaceDashboard } from "react-icons/md";
 import { FiLogOut } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserAsync, selectIsLoggedIn } from "@/features/auth/authSlice";
+import {
+  getUserAsync,
+  logOut,
+  selectIsLoggedIn,
+} from "@/features/auth/authSlice";
 import { Dispatch } from "@reduxjs/toolkit";
 
 const Navbar = () => {
@@ -20,6 +24,10 @@ const Navbar = () => {
 
   const navigateTo = (route: string) => {
     router.push(route);
+  };
+
+  const handleLogout = () => {
+    dispatch(logOut());
   };
 
   useEffect(() => {
@@ -75,7 +83,7 @@ const Navbar = () => {
                   <MenuItem className={styles.menuItem}>
                     <MdSpaceDashboard /> Dashboard
                   </MenuItem>
-                  <MenuItem className={styles.menuItem}>
+                  <MenuItem className={styles.menuItem} onClick={handleLogout}>
                     <FiLogOut /> Logout
                   </MenuItem>
                 </MenuList>

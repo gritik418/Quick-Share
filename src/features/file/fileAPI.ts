@@ -1,7 +1,7 @@
 import axios from "axios";
 import { File } from "buffer";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL!;
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL!;
 
 export const uploadFile = async (file: File) => {
   try {

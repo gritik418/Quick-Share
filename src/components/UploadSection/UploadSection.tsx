@@ -115,7 +115,7 @@ const UploadSection = () => {
 
         <div className={styles.group}>
           <label className={styles.email_label} htmlFor="receiver_email">
-            Receiver's Email
+            Receiver&apos;s Email
           </label>
           <input
             className={styles.email_input}

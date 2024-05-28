@@ -32,7 +32,7 @@ const Navbar = () => {
 
   useEffect(() => {
     dispatch(getUserAsync());
-  }, []);
+  }, [dispatch]);
   return (
     <div className={styles.container}>
       <nav className={styles.navbar}>

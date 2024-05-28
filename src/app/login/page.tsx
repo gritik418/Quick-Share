@@ -54,7 +54,7 @@ const Login = () => {
         <div className={styles.content}>
           <h1 className={styles.heading}>Login</h1>
           <p className={styles.title}>
-            Don't have an account?
+            Don&apos;t have an account?
             <Link href={"/signup"} className={styles.link}>
               {" "}
               Create a free account

@@ -42,7 +42,6 @@ const Login = () => {
   });
 
   useEffect(() => {
-    console.log(isLoggedIn);
     if (!isLoggedIn) return;
     redirect("/");
   }, [isLoggedIn]);

@@ -66,7 +66,7 @@ const Navbar = () => {
               </button>
             </div>
 
-            <NavbarDrawer isLoggedIn />
+            <NavbarDrawer />
           </>
         ) : (
           <>
@@ -88,7 +88,7 @@ const Navbar = () => {
                   </MenuItem>
                 </MenuList>
               </Menu>
-              <NavbarDrawer isLoggedIn />
+              <NavbarDrawer />
             </div>
           </>
         )}

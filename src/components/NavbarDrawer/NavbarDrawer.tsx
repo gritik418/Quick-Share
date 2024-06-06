@@ -15,9 +15,12 @@ import { FiLogIn } from "react-icons/fi";
 import { FaUserPlus } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { FaDownload } from "react-icons/fa6";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "@/features/auth/authSlice";
 
-const NavbarDrawer = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
+const NavbarDrawer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const isLoggedIn: boolean = useSelector(selectIsLoggedIn);
   const btnRef = useRef<any>();
   const pathname = usePathname();
 
